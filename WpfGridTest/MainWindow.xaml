@@ -4,9 +4,94 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfGridTest"
+        xmlns:classes="clr-namespace:WpfGridTest.Classes"
+        DataContext="{Binding ViewModel, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="600" Width="800">
+    
         
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="110"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Content="{Binding TestString}" Click="Button_Click"></Button>
+
+        <!--direct binding to list of object-->
+        <DataGrid Grid.Row="1" x:Name="DataGrid" ItemsSource="{Binding DataModels}">
+        </DataGrid>
+
+        <!--special styled radio buttons-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Background="AliceBlue" Height="40">
+            <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
+                         IsChecked="True"
+                         Width="20"
+                         Content="L" 
+                         ToolTip="Lohnabrechnung"
+                         GroupName="OptionsButtons" 
+                         Cursor="Hand">
+            </RadioButton>
+            <RadioButton Content="K"
+                         Style="{StaticResource {x:Type ToggleButton}}"
+                         Width="20"
+                         ToolTip="Klinik"
+                         GroupName="OptionsButtons"
+                         Cursor="Hand">
+            </RadioButton>
+            <RadioButton Content="B"
+                         Style="{StaticResource {x:Type ToggleButton}}"
+                         Width="20"
+                         ToolTip="Beide"
+                         GroupName="OptionsButtons"
+                         Cursor="Hand">
+            </RadioButton>
+        </StackPanel>
+        
+        
+        <!--list with different types and auto template selection-->
+        
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <ComboBox Grid.Row="0" Grid.Column="0"
+                      ItemsSource="{Binding Path=Things}"
+                      SelectedItem="{Binding Path=SelectedThing}" />
+
+            <ContentControl Grid.Column="0" Grid.Row="1" Content="{Binding Path=SelectedThing}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type classes:Thing1}">
+                        <StackPanel>
+                            <TextBlock Text="This Is the template for Thing1" />
+                            <Button Content="This is a button!" />
+                        </StackPanel>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type classes:Thing2}">
+                        <StackPanel>
+                            <TextBlock Text="This Is the template for Thing2" />
+                            <TextBox Text="Enter some text" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+
+
+        </Grid>
+        
+
+
     </Grid>
+    
+    
 </Window>

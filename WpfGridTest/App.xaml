@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:WpfGridTest"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <local:ViewModelLocator x:Key="Locator"></local:ViewModelLocator>
     </Application.Resources>
 </Application>

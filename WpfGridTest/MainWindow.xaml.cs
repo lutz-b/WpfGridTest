@@ -24,5 +24,17 @@ namespace WpfGridTest
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DataGrid.SelectAll();
+            DataGrid.Focus();
+
+            DataGrid.ClipboardCopyMode = DataGridClipboardCopyMode.ExcludeHeader;
+            
+
+            ApplicationCommands.Copy.Execute(null, DataGrid);
+
+        }
     }
 }
