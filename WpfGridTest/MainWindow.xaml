@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:WpfGridTest"
         xmlns:classes="clr-namespace:WpfGridTest.Classes"
         DataContext="{Binding ViewModel, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="900">
     
         
     <Grid>
@@ -15,6 +16,9 @@
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="110"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -86,10 +90,32 @@
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
-
-
         </Grid>
         
+
+        <!--how to trigger binding bevore focus is lost ???-->
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <xctk:DateTimePicker Width="200"
+                                 AutoCloseCalendar="True"
+                                 Value="{Binding TestDateTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                 >
+
+            </xctk:DateTimePicker>
+            <xctk:DateTimeUpDown Width="200"
+                                 Value="{Binding TestDateTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+
+            </xctk:DateTimeUpDown>
+            <DatePicker Width="200"
+                        SelectedDate="{Binding TestDateTime, Mode=TwoWay}">
+
+            </DatePicker>
+            <Label Width="200" 
+                   Content="{Binding TestDateTime}"
+                   ContentStringFormat="dd MMM yyyy">
+            </Label>
+
+        </StackPanel>
 
 
     </Grid>

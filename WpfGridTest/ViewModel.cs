@@ -31,6 +31,8 @@ namespace WpfGridTest
 
         public ObservableCollection<Object> Things { get; set; }
         private Object _selectedThing;
+        private DateTime _testDateTime = DateTime.Today;
+
         public Object SelectedThing
         {
             get
@@ -47,5 +49,10 @@ namespace WpfGridTest
             }
         }
 
+        public DateTime TestDateTime
+        {
+            get => _testDateTime;
+            set => SetProperty(ref _testDateTime, value);
+        }
     }
 }
